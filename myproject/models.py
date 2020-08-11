@@ -5,7 +5,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask import redirect, url_for
 from datetime import datetime
 
-from myproject import db, login_manager, admin
+from myproject import db, login_manager #, admin
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -30,6 +30,24 @@ class User(db.Model, UserMixin):
     def check_password(self,password):
         return check_password_hash(self.password_hash, password)
 
+# 管理者のデータベース
+
+class AdminUser(db.Model, UserMixin):
+
+    __tablename__ = 'admin'
+
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    email = db.Column(db.String(64), unique=True, index=True)
+    password_hash = db.Column(db.String(128))
+
+    def __init__(self, email, username, password):
+        self.email = email
+        self.username = username
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self,password):
+        return check_password_hash(self.password_hash, password)
 
 
 # Customize Admin page Base view
@@ -41,5 +59,6 @@ class MyModelView(ModelView):
         return redirect(url_for('auth.login'))
 
 # add a set of admin pages here.
-admin.add_view(MyModelView(User, db.session))
+# admin.add_view(MyModelView(User, db.session))
+# admin.add_view(MyModelView(AdminUser, db.session))
 
