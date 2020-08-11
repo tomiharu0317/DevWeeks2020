@@ -18,6 +18,8 @@ if __name__ == "__main__":
 # ・アルゴリズム
 # ・datetimeのdbへの渡し方
 # ・urlにusernameを渡す /<username>/scheduletoday
+# ・最初にadmin用のsuperuserを作る方法
+# ・一般ユーザーと管理者のログイン管理状態を分離する
 
 # 課題
 # ・flashを消せるようにする/flashが表示される場所
