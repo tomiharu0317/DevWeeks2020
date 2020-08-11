@@ -37,6 +37,10 @@ class MyAdminIndexView(AdminIndexView):
 
 admin = Admin(app, template_mode='bootstrap3', index_view=MyAdminIndexView(),)
 
+from myproject.auth.views import auth_blueprint
+
+app.register_blueprint(auth_blueprint, url_prefix='/authenticate')
+
 login_manager.init_app(app)
 
 login_manager.login_view = "login"

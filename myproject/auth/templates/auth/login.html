@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+{% endwith %}
+    {# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+    {{ form.email.label }} {{ form.email() }}
+    {{ form.password.label }} {{ form.password() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}
