@@ -38,9 +38,14 @@ class MyAdminIndexView(AdminIndexView):
 admin = Admin(app, template_mode='bootstrap3', index_view=MyAdminIndexView(),)
 
 from myproject.auth.views import auth_blueprint
+from myproject.task.views import task_blueprint
 
 app.register_blueprint(auth_blueprint, url_prefix='/authenticate')
 
+# ログインしたときにユーザー名を持ってきて，prefixのusernameに入れる(とりあえず諦めた)
+app.register_blueprint(task_blueprint, url_prefix='/user/')
+
 login_manager.init_app(app)
 
-login_manager.login_view = "login"
+login_manager.login_view = "auth.login"
+# login_manager.login_view = "login"s

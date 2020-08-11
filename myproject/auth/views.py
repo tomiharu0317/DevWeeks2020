@@ -1,7 +1,7 @@
 from flask import (Blueprint, render_template,
                      redirect, url_for, request,
                      flash, abort)
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
@@ -27,6 +27,7 @@ def logout():
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
 
+
     form = LoginForm()
     if form.validate_on_submit():
 
@@ -42,12 +43,12 @@ def login():
             flash('Logged in successfully.')
 
             # login => today's schedule page
-            return redirect(url_for('index'))
+            return redirect(url_for('task.scheduletoday'))
         else:
             pass
 
-
-    return render_template('login.html', form=form)
+    # ログインした状態でログインしないでいけるurlにはアクセスしようとしたらredirectする
+    return  redirect(url_for('task.scheduletoday')) if current_user.is_authenticated else render_template('login.html', form=form)
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -73,4 +74,4 @@ def signup():
             db.session.commit()
             flash('Now You can login!')
             return redirect(url_for('auth.login'))
-    return render_template('signup.html', form=form)
+    return redirect(url_for('task.scheduletoday')) if current_user.is_authenticated else render_template('signup.html', form=form)

@@ -1,10 +1,13 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
+from flask_login import current_user
 
 from myproject import app
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+
+    # ログインした状態でログインしないでいけるurlにはアクセスしようとしたらredirectする
+    return  redirect(url_for('task.scheduletoday')) if current_user.is_authenticated else render_template('home.html')
 
 
 if __name__ == "__main__":
@@ -14,3 +17,7 @@ if __name__ == "__main__":
 # ・直接指定のurlへとぶ方法
 # ・アルゴリズム
 # ・datetimeのdbへの渡し方
+# ・urlにusernameを渡す /<username>/scheduletoday
+
+# 課題
+# ・flashを消せるようにする/flashが表示される場所
