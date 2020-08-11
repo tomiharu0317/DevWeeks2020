@@ -1,5 +1,4 @@
 from flask import render_template
-import os
 
 from myproject import app
 
@@ -10,3 +9,8 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# QA
+# ・直接指定のurlへとぶ方法
+# ・アルゴリズム
+# ・datetimeのdbへの渡し方
