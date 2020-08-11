@@ -14,6 +14,7 @@
 6. コミット & プッシュ
 7. マージされたら，masterブランチへ
 8. masterを最新状態へ更新
+9. 作業していたブランチを削除
 
 ```
 git checkout -b feature/<作業名>#<issue番号>
@@ -27,6 +28,7 @@ PUll requestを送る
 
 git checkout master
 git pull
+git branch --delete feature/<作業名>#<issue番号>
 ```
 
 #### ブランチ内で作業しているときにmasterへ重要な変更があったとき
@@ -45,6 +47,8 @@ git pull origin master
 git checkout feature/<作業名>#<issue番号>
 git merge origin master
 ```
+
+[参考](https://bake0937.hatenablog.com/entry/2017/11/07/081616)
 
 ## データベースの更新
 
