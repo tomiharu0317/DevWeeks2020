@@ -11,15 +11,20 @@
   </head>
   <body>
 
-<!-- ここから -->
-    Study Plan
-    <a href="{{ url_for('auth.signup') }}">今すぐ始める</a>
-    <a href="{{ url_for('auth.login') }}">ログイン</a>
+    <header>
 
     {% if current_user.is_authenticated %}
+        <p>Hi {{ current_user.username }}!</p>
+        <a class="nav-item nav-link" href="{{ url_for('task.scheduletoday') }}">今日のスケジュール</a>
+        <a class="nav-item nav-link" href="{{ url_for('task.alltasks')}}">タスク一覧</a>
         <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+        <a class="nav-item nav-link" href="{{ url_for('index') }}">Study Plan</a>
+        <a class="nav-item nav-link" href="{{ url_for('auth.login') }}">ログイン</a>
     {% endif %}
-<!-- ここまでが<header></header> -->
+
+    </header>
+
     {% block content %}
 
     {% endblock %}
