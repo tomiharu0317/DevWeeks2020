@@ -28,7 +28,9 @@ def scheduletoday():
 @login_required
 def alltasks():
 
-    return  redirect(url_for('auth.login')) if not current_user.is_authenticated else render_template('all_tasks.html')
+    data =  Task.query.filter_by(classification=1).first()
+
+    return  redirect(url_for('auth.login')) if not current_user.is_authenticated else render_template('all_tasks.html', data=data)
 
 
 
@@ -47,9 +49,10 @@ def fixedschedule():
 
     form = FixedScheduleForm()
 
-    if form.validate():
+    if form.validate_on_submit():
 
-        task = Task(taskname=form.taskname.data,
+        task = Task(classification=1,
+                    taskname=form.taskname.data,
                     date=str(form.date.data),
                     startat=str(form.startat.data),
                     endat=str(form.endat.data))
@@ -72,6 +75,21 @@ def otherworks():
 
     form = OtherWorksForm()
 
+    if form.validate_on_submit():
+
+        task = Task(classification=2,
+                    taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    due=str(form.due.data),
+                    taskweight=int(form.taskweight.data))
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
+
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('otherworks.html', form=form)
 
@@ -82,6 +100,22 @@ def otherworks():
 def report():
 
     form = ReportForm()
+
+    if form.validate_on_submit():
+
+        task = Task(classification=3,
+                    taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    due=str(form.due.data),
+                    taskweight=int(form.taskweight.data),
+                    lang=form.lang.data,
+                    words=form.words.data)
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
 
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('report.html', form=form)
@@ -94,6 +128,21 @@ def test():
 
     form = TestForm()
 
+    if form.validate_on_submit():
+
+        task = Task(classification=4,
+                    taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    due=str(form.due.data),
+                    taskweight=int(form.test_weight.data),
+                    anylength=form.test_time.data)
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('test.html', form=form)
 
@@ -104,6 +153,22 @@ def test():
 def testprepare():
 
     form = TestPrepareForm()
+
+    form = TestForm()
+
+    if form.validate_on_submit():
+
+        task = Task(classification=5,
+                    taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    due=str(form.due.data),
+                    taskweight=int(form.test_weight.data))
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
 
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('testprepare.html', form=form)
@@ -116,6 +181,24 @@ def presentation():
 
     form = PresentationForm()
 
+    if form.validate_on_submit():
+
+        # classification
+
+        task = Task(classification=6,
+                    taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    due=str(form.due.data),
+                    anylength=form.presentation_time.data,
+                    page_num=form.page_num.data)
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
+
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('presentation.html', form=form)
 
@@ -126,6 +209,20 @@ def presentation():
 def ondemandclass():
 
     form = OndemandClassForm()
+
+    if form.validate_on_submit():
+
+        task = Task(classification=7,
+                    taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    due=str(form.due.data),
+                    anylength=form.class_length.data)
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
 
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('ondemandclass.html', form=form)

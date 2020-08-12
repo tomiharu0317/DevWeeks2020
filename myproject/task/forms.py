@@ -48,7 +48,7 @@ class ReportForm(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
     due = TimeField('Due', format='%H:%M', validators=[DataRequired()])
     taskweight = RadioField('内容の重さ', choices=[('3', '重い'), ('2', '普通'), ('1', '軽い')], validators=[DataRequired()])
-    lang = RadioField('レポートの言語', choices=[('3', '二外'), ('2', '英語'), ('1', '日本語')], validators=[DataRequired()])
+    lang = RadioField('レポートの言語', choices=[('二外', '二外'), ('英語', '英語'), ('日本語', '日本語')], validators=[DataRequired()])
     words = IntegerField('文字数', validators=[DataRequired()])
     submit = SubmitField('Add')
 
