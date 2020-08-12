@@ -1,6 +1,9 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% extends "base.html" %}
 {% block content %}
+<h1>here is login form.</h1>
 <form method="POST">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% with messages = get_flashed_messages() %}
     {% if messages %}
       {% for message in messages %}
@@ -20,3 +23,5 @@
     {{ form.submit() }}
 </form>
 {% endblock %}
+
+
