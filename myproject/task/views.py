@@ -8,9 +8,9 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from myproject import db, app
 from myproject.models import User
-# from myproject.task.forms import (FixedScheduleForm, OtherWorksForm,
-#                                   ReportForm, TestForm, TestPrepareForm,
-#                                   PresentationForm, OndemandClassForm)
+from myproject.task.forms import (FixedScheduleForm, OtherWorksForm,
+                                  ReportForm, TestForm, TestPrepareForm,
+                                  PresentationForm, OndemandClassForm)
 
 task_blueprint = Blueprint('task',
                            __name__,
@@ -32,7 +32,6 @@ def alltasks():
 
 
 
-
 @task_blueprint.route('/addtask')
 @login_required
 def addtask():
@@ -42,13 +41,14 @@ def addtask():
 
 
 
-
 @task_blueprint.route('/addtask/fixedschedule')
 @login_required
 def fixedschedule():
 
+    form = FixedScheduleForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('fixedschedule.html')
+            else render_template('fixedschedule.html', form=form)
 
 
 
@@ -56,8 +56,10 @@ def fixedschedule():
 @login_required
 def otherworks():
 
+    form = OtherWorksForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('otherworks.html')
+            else render_template('otherworks.html', form=form)
 
 
 
@@ -65,8 +67,10 @@ def otherworks():
 @login_required
 def report():
 
+    form = ReportForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('report.html')
+            else render_template('report.html', form=form)
 
 
 
@@ -74,8 +78,10 @@ def report():
 @login_required
 def test():
 
+    form = TestForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('test.html')
+            else render_template('test.html', form=form)
 
 
 
@@ -83,8 +89,10 @@ def test():
 @login_required
 def testprepare():
 
+    form = TestPrepareForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('testprepare.html')
+            else render_template('testprepare.html', form=form)
 
 
 
@@ -92,8 +100,10 @@ def testprepare():
 @login_required
 def presentation():
 
+    form = PresentationForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('presentation.html')
+            else render_template('presentation.html', form=form)
 
 
 
@@ -101,5 +111,7 @@ def presentation():
 @login_required
 def ondemandclass():
 
+    form = OndemandClassForm()
+
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
-            else render_template('ondemandclass.html')
+            else render_template('ondemandclass.html', form=form)
