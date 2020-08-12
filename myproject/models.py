@@ -48,7 +48,7 @@ class AdminUser(db.Model, UserMixin):
     def check_password(self,password):
         return check_password_hash(self.password_hash, password)
 
-タスクのデータベース
+# タスクのデータベース
 class Task(db.Model, UserMixin):
 
     __tablename__ = 'task'
@@ -62,7 +62,7 @@ class Task(db.Model, UserMixin):
     endat = db.Column(db.String(16))
     due = db.Column(db.String(16))
     taskweight = db.Column(db.Integer)
-    lang = db.Column(db.Integer)
+    lang = db.Column(db.String(16))
     words = db.Column(db.Integer)
     # anylength = (test_time, presentation_time, class_length)
     anylength = db.Column(db.Integer)

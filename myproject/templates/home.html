@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<a class="nav-item nav-link" href="{{ url_for('auth.signup') }}">今すぐ始める</a>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
@@ -15,9 +14,14 @@
 {% endwith %}
 
 {% if not current_user.is_authenticated %}
-<div>
-  <a href="{{ url_for('auth.signup') }}">今すぐ始める</a>
+<div class="jumbotron">
+  <h1 class="display-4">Study Plan</h1>
+  <p class="lead">Study Plan は オンライン授業時代のタスク管理を容易にします</p>
+  <hr class="my-4">
+  <p>登録すれば今すぐに使えます</p>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('auth.signup') }}" role="button">今すぐ始める</a>
 </div>
 {% endif %}
 
 {% endblock %}
+
