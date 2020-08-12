@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>タスクの分類を選択してください</h1>
+
+<a href="{{ url_for('task.fixedschedule') }}">予定</a>
+<a href="{{ url_for('task.otherworks') }}">他の課題</a>
+<a href="{{ url_for('task.report') }}">レポート</a>
+<a href="{{ url_for('task.test') }}">テスト</a>
+<a href="{{ url_for('task.testprepare') }}">テスト対策</a>
+<a href="{{ url_for('task.presentation') }}">プレゼンテーション</a>
+<a href="{{ url_for('task.ondemandclass') }}">授業</a>
+{% endblock %}

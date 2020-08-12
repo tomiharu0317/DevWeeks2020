@@ -1,4 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Here are the all tasks you will do.</h1>
+
+<a href="{{ url_for('task.addtask') }}">新しいタスク</a>
+
+<h5>ここにタスクの一覧を表示</h5>
+<ul>
+    <li>...</li>
+    <li>...</li>
+</ul>
 {% endblock %}
