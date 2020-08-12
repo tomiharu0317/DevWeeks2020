@@ -7,7 +7,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from myproject import db, app
-from myproject.models import User
+from myproject.models import User, Task
 from myproject.task.forms import (FixedScheduleForm, OtherWorksForm,
                                   ReportForm, TestForm, TestPrepareForm,
                                   PresentationForm, OndemandClassForm)
@@ -41,18 +41,32 @@ def addtask():
 
 
 
-@task_blueprint.route('/addtask/fixedschedule')
+@task_blueprint.route('/addtask/fixedschedule', methods=['GET', 'POST'])
 @login_required
 def fixedschedule():
 
     form = FixedScheduleForm()
+
+    if form.validate():
+
+        task = Task(taskname=form.taskname.data,
+                    date=str(form.date.data),
+                    startat=str(form.startat.data),
+                    endat=str(form.endat.data))
+
+        db.session.add(task)
+        db.session.commit()
+
+        # 送ったらタスク一覧へリダイレクト
+        return redirect(url_for('task.alltasks'))
+
 
     return  redirect(url_for('auth.login')) if not current_user.is_authenticated \
             else render_template('fixedschedule.html', form=form)
 
 
 
-@task_blueprint.route('/addtask/otherworks')
+@task_blueprint.route('/addtask/otherworks', methods=['GET', 'POST'])
 @login_required
 def otherworks():
 
@@ -63,7 +77,7 @@ def otherworks():
 
 
 
-@task_blueprint.route('/addtask/report')
+@task_blueprint.route('/addtask/report', methods=['GET', 'POST'])
 @login_required
 def report():
 
@@ -74,7 +88,7 @@ def report():
 
 
 
-@task_blueprint.route('/addtask/test')
+@task_blueprint.route('/addtask/test', methods=['GET', 'POST'])
 @login_required
 def test():
 
@@ -85,7 +99,7 @@ def test():
 
 
 
-@task_blueprint.route('/addtask/testprepare')
+@task_blueprint.route('/addtask/testprepare', methods=['GET', 'POST'])
 @login_required
 def testprepare():
 
@@ -96,7 +110,7 @@ def testprepare():
 
 
 
-@task_blueprint.route('/addtask/presentation')
+@task_blueprint.route('/addtask/presentation', methods=['GET', 'POST'])
 @login_required
 def presentation():
 
@@ -107,7 +121,7 @@ def presentation():
 
 
 
-@task_blueprint.route('/addtask/ondemandclass')
+@task_blueprint.route('/addtask/ondemandclass', methods=['GET', 'POST'])
 @login_required
 def ondemandclass():
 
