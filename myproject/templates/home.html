@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+<a class="nav-item nav-link" href="{{ url_for('auth.signup') }}">今すぐ始める</a>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
