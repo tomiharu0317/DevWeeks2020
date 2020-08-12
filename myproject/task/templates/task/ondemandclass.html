@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>オンデマンド授業</h2>
+
+<form method="POST">
+    {# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+    {{ form.taskname.label }}{{ form.taskname() }}
+    {{ form.date.label }}{{ form.date() }}
+    {{ form.due.label }}{{ form.due() }}
+    {{ form.class_length.label }}{{ form.class_length() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>決められた予定</h2>
+
+<form method="POST">
+    {# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+    {{ form.taskname.label }}{{ form.taskname() }}
+    {{ form.date.label }}{{ form.date() }}
+    {{ form.startat.label }}{{ form.startat() }}
+    {{ form.endat.label }}{{ form.endat() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}

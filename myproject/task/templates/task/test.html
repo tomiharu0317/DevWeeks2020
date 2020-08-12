@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>テスト</h2>
+
+<form method="POST">
+    {# This hidden_tag is a CSRF security feature. #}
+    {{ form.hidden_tag() }}
+    {{ form.taskname.label }}{{ form.taskname() }}
+    {{ form.date.label }}{{ form.date() }}
+    {{ form.due.label }}{{ form.due() }}
+    {{ form.test_time.label }}{{ form.test_time() }}
+    {{ form.test_weight.label }}{{ form.test_weight() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}
